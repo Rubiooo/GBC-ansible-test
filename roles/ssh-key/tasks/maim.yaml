@@ -1,0 +1,18 @@
+- file:
+    path: /home/sysadmin/.ssh
+    state: directory
+    owner: sysadmin
+    group: sysadmin
+    mode: 0755
+- name: create authorized keys
+  command: touch /home/sysadmin/.ssh/authorized_keys
+- file:
+    path: /home/sysadmin/.ssh/authorized_keys
+    owner: sysadmin
+    group: sysadmin
+    mode: 0644
+- name: install public keys
+  lineinfile:
+    path: /home/sysadmin/.ssh/authorized_keys
+    line: "ssh-rsa AAAAB3NzaC1yc2ED6+c/tz3JExampleExampleExampleExample"
+    # become: yes
