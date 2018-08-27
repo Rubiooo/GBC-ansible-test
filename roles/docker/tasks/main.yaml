@@ -1,0 +1,20 @@
+
+- name: Ensure yum-utils is installed
+  yum:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - yum-utils
+    - device-mapper-persistent-data
+    - lvm2
+    - ca-certificates
+  become: true
+
+- name: Add Docker CE repository
+  get-url:
+    url: https://download.docker.com/linux/centos/docker-ce.repo
+    dest: /etc/yum.repos.d/docker-ce.repo
+    mode: 0644
+    validate_certs: no
+  become: true
+  register: yum_repo

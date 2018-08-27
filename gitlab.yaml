@@ -1,0 +1,11 @@
+---
+# ansible_playbook -i inventory gitlab.yaml -K
+# xxxx (password)
+
+- name: install docker
+  hosts: "gitlab"
+  roles:
+    - ssh-key
+    - docker
+    - docker-compose
+    - gitlab-master
