@@ -1,0 +1,21 @@
+---
+# ansible-playbook -i inventory sshaccess.yaml -e host=sanbox -k
+# xxxxxx (password)
+
+- name: check ssh
+  hosts: "{{ host }}"
+  roles:
+    - ssh-key
+#  tasks:
+#    - name: create authorized_keys
+#        command: touch/home/sysadmin/.ssh/authorized_keys
+#    - file:
+#        path: /home/sysadmin/.ssh/authorized_keys
+#        owner: sysadmin
+#        group: sysadmin
+#        mode: 0644
+#    - name: install public key
+#        lineinfile:
+#          path: /home/sysadmin/.ssh/authorized_keys
+#          line: "ssh-rsa AAAAB3Ndjkw5GBBBEXAMPLEEXMPLEEXAMPLE"
+#    become: yes
