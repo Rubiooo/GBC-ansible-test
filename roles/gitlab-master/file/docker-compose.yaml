@@ -1,0 +1,21 @@
+version: "2.2"
+services:
+    gitlab:
+      image: 'gitlab/gitlab-ee:latest'
+      container_name: gitlab
+      restart: always
+      hostname: 'gitrepo.georgebrown.ca'
+      environment:
+        GITLAB_OMNIBUS_CONFIG: |
+          external_url 'https://gitrepo.georgebrown.ca/'
+          gitlab_rails['gitlab_shell_ssh_port'] = 2222
+      ports:
+        - '9090:9090'
+        - '2222:22'
+        - "80:80"
+        - "443:443"
+        - "5000:5000"
+      volumes:
+        - '/app/gitlab/config:/etc/gitlab'
+        - '/app/gitlab/logs:/var/log/gitlab'
+        - '/app/gitlab/data:/var/opt/gitlab'

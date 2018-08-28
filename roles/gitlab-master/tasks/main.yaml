@@ -1,0 +1,22 @@
+- name: Ensure /app/gitlab directory exists
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ansible_user}}"
+    mode: 0755
+  with_items:
+    - /app/gitlab
+    - /app/gitlab/config
+    - /app/gitlab/logs
+    - /app/gitlab/data
+  become: true
+
+- name: copy docker-compose.yaml
+  copy:
+    src: docker-compose.yaml
+    dest: /app/gitlab/docker-compose.yaml
+
+- name: copy config
+  copy:
+    src: config/
+    dest: /app/gitlab/config/
