@@ -18,3 +18,37 @@
     validate_certs: no
   become: true
   register: yum_repo
+
+- name: enable rhel-7-server-extras-rpms
+  shell: subscription-manager repos --enable rhel-7-server-extras-rpms
+  when: ansible_distribution == "RedHat" and ansible_distribution_major_version == "7"
+  become: true
+
+- name: Update yum cache
+  shell: yum makecache fast
+  args:
+    warn: false
+  become: true
+  when: yum_repo.changed
+
+- name: Ensure the docker CE is the latest version
+  yum:
+    name: docker-ce
+    state: latest
+  become: true
+
+
+- name: Ensure /etc/docker directory exists
+  file:
+    path: /etc/docker
+    state: directory
+    mode: 0755
+  become: true
+
+- name: reload service docker, in all cases
+  systemd:
+    name: docker
+    enabled: true
+    state: restarted
+    state: reloaded
+  become: true
