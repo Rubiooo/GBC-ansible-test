@@ -1,0 +1,6 @@
+{
+ "insecure-registries":
+  ["registry.xxx.ca"],
+  "metrics-addr" : "127.0.0.1:1111",
+  "experimental" : true 
+}
