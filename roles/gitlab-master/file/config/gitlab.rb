@@ -214,6 +214,12 @@ main: # 'main' is the GitLab 'provider ID' of this LDAP server
   block_auto_created_users: false
   base: ''
   user_filter: ''
+  attributes:
+  username: ['uid', 'userid', 'sAMAccountName']
+  email:    ['mail', 'email', 'userPrincipalName']
+  name:       'displayName'
+  first_name: 'givenName'
+  last_name:  'sn'
   ## EE only
   group_base: ''
   admin_group: ''
