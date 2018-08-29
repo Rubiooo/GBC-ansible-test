@@ -196,28 +196,28 @@ gitlab_rails['time_zone'] = 'UTC'
 ###! **Be careful not to break the indentation in the ldap_servers block. It is
 ###!   in yaml format and the spaces must be retained. Using tabs will not work.**
 
-# gitlab_rails['ldap_enabled'] = false
+gitlab_rails['ldap_enabled'] = true
 
 ###! **remember to close this block with 'EOS' below**
-# gitlab_rails['ldap_servers'] = YAML.load <<-'EOS'
-#   main: # 'main' is the GitLab 'provider ID' of this LDAP server
-#     label: 'LDAP'
-#     host: '_your_ldap_server'
-#     port: 389
-#     uid: 'sAMAccountName'
-#     bind_dn: '_the_full_dn_of_the_user_you_will_bind_with'
-#     password: '_the_password_of_the_bind_user'
-#     encryption: 'plain' # "start_tls" or "simple_tls" or "plain"
-#     verify_certificates: true
-#     active_directory: true
-#     allow_username_or_email_login: false
-#     block_auto_created_users: false
-#     base: ''
-#     user_filter: ''
-#     ## EE only
-#     group_base: ''
-#     admin_group: ''
-#     sync_ssh_keys: false
+gitlab_rails['ldap_servers'] = YAML.load <<-'EOS'
+main: # 'main' is the GitLab 'provider ID' of this LDAP server
+  label: 'LDAP'
+  host: 'your_server_for_user_account_mgmt'
+  port: 389 // ldap default port
+  uid: 'sAMAccountName'
+  bind_dn: 'cn=Users,cn=ldapuser,dc=gbc,dc=local'
+  password: 'passwordXXXfortheuser'
+  encryption: 'plain' # "start_tls" or "simple_tls" or "plain"
+  verify_certificates: true
+  active_directory: true
+  allow_username_or_email_login: false
+  block_auto_created_users: false
+  base: ''
+  user_filter: ''
+  ## EE only
+  group_base: ''
+  admin_group: ''
+  sync_ssh_keys: false
 #
 #   secondary: # 'secondary' is the GitLab 'provider ID' of second LDAP server
 #     label: 'LDAP'
@@ -237,7 +237,7 @@ gitlab_rails['time_zone'] = 'UTC'
 #     group_base: ''
 #     admin_group: ''
 #     sync_ssh_keys: false
-# EOS
+EOS
 
 ### OmniAuth Settings
 ###! Docs: https://docs.gitlab.com/ce/integration/omniauth.html
