@@ -1,0 +1,36 @@
+- name: Ensure /app/jenkins directory exists
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ansible_user}}"
+    mode: 0755
+  with_items:
+    - /app/jenkins
+    - /app/jenkins/home
+  become: true
+
+- name: copy docker-compose.yaml and dockerfile
+  copy:
+    src: .
+    dest: /app/jenkins/
+
+- file:
+    path: /app/jenkins/config/ssh/id_rsa
+    owner: root
+    group: root
+    mode: 0600
+  become: true
+
+- file:
+    path: /app/jenkins/config/ssh/config
+    owner: root
+    group: root
+    mode: 0600
+  become: true
+
+- file:
+    path: /app/jenkins/config/ssh/id_rsa_gjsun
+    owner: root
+    group: root
+    mode: 0600
+  become: true

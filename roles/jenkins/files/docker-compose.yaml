@@ -1,0 +1,16 @@
+version "2.2"
+services:
+  jenkins:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: jenkins
+    restart: always
+    hostname: 'jenkins.gbc.ca'
+    ports:
+      - "8443:8443"
+      - "50001:50001"
+    volumes:
+       - '/app/jenkins/home:/var/jenkins_home'
+       - '/var/run/docker.sock:/var/run/docker.sock'
+       - '/app/jenkins/config/ssh:/root/.ssh'

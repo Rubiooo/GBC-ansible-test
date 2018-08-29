@@ -1,0 +1,8 @@
+---
+# ansible-playbook -i inventory jenkins.yaml -K
+# passwordXXX
+
+- name: install jenkins
+  hosts: "gitlab"
+  roles:
+    - jenkins
