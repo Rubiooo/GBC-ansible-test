@@ -1,0 +1,16 @@
+
+- name: Download docker-1.7 rpm for RHEL6
+  shell: curl -k -o /tmp/docker-engine.rpm https://yum.dockerproject.org/repo/main/centos/6/Packages/docker-engine-1.7.1-1.el6.x86_64.rpm
+  register: yum_repo
+
+- name: Install docker-1.7
+  shell: yum localinstall --nogpgcheck /tmp/docker-engine.rpm
+  when: ansible_distribution == "RedHat" and ansible_distribution_major_version == "6"
+  become: true
+
+- name: Reload service docker, in call cases
+  service:
+    name: docker
+    enabled: true
+    state: restarted
+  become: true 
