@@ -10,7 +10,7 @@
 ##! URL on which GitLab will be reachable.
 ##! For more details on configuring external_url see:
 ##! https://docs.gitlab.com/omnibus/settings/configuration.html#configuring-the-external-url-for-gitlab
-external_url 'https://gitrepo.georgebrown.ca'
+external_url 'https://example.ca'
 #external_url 'http://gitlab3.lblw.ca'
 
 ## Roles for multi-instance GitLab
