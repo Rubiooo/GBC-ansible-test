@@ -1,0 +1,43 @@
+- name: Ensure /app/prometheus directory exists
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ansible_user}}"
+    mode: 0755
+  with_items:
+    - /app/prometheus
+    - /app/prometheus/etc
+  become: true
+
+- name: Ensure /app/prometheus directory 777
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ansible_user}}"
+    mode: 0777
+  with_items:
+    - /app/prometheus/data
+    - /app/prometheus/grafana
+  become: true
+
+- name: copy docker-compose.yaml
+  copy:
+    src: docker-compose.yaml
+    dest: /app/prometheus/docker-compose.yaml
+
+- name: copy prometheus config
+  copy:
+    src: prometheus/prometheus.yml
+    dest: /app/prometheus/etc/prometheus.yml
+
+- name: copy prometheus.service
+  copy:
+    src: prometheus.service
+    dest: /etc/systemd/system/prometheus.service
+  become: yes
+
+# - name: enable service prometheus
+#   systemd:
+#     name: prometheus
+#     enabled: yes
+#   become: yes
