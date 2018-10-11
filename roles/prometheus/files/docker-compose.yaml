@@ -1,0 +1,53 @@
+version: "3.2"
+
+services:
+  prometheus:
+    image: quay.io/prometheus/prometheus:v2.2.1
+    container_name: prometheus
+    ports:
+      - 9090:9090
+    volumes:
+      - /app/prometheus/data:/prometheus
+      - /app/prometheus/etc/prometheus.yml:/etc/prometheus/prometheus.yml
+      # - /conf/monitoring/pcod_rules.yml:/etc/prometheus/pcod_rules.yml
+    networks:
+      - mon_net
+    logging:
+      driver: "json-file"
+
+  # consul:
+  #   image: consul:1.0.7
+  #   container_name: consul
+  #   environment:
+  #     - CONSUL_BIND_INTERFACE=eth0
+  #   volumes:
+  #     - consul_data:/consul/data
+  #   network_mode: "host"
+  #   logging:
+  #     driver: "json-file"
+  #   command: ["agent", "-dev", "-client", "0.0.0.0"]
+
+  grafana:
+    image: grafana/grafana:5.1.2
+    container_name: grafana
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=adminpassword
+    ports:
+      - 3000:3000
+    volumes:
+      - /app/prometheus/grafana:/var/lib/grafana
+    networks:
+      - mon_net
+    logging:
+      driver: "json-file"
+
+# volumes:
+#   prometheus_data:
+#     driver: local
+#   consul_data:
+#     driver: local
+#   grafana_data:
+#     driver: local
+
+networks:
+  mon_net:

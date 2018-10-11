@@ -1,0 +1,29 @@
+- name: Ensure /app/artifactory directory exists
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ansible_user}}"
+    mode: 0755
+  with_items:
+    - /app/artifactory
+    - /app/artifactory/data
+    - /app/artifactory/postgresql
+  become: true
+
+- name: copy docker-compose.yaml
+  copy:
+    src: docker-compose.yaml
+    dest: /app/artifactory/docker-compose.yaml
+
+
+- name: copy artifactory.service
+  copy:
+    src: artifactory.service
+    dest: /etc/systemd/system/artifactory.service
+  become: yes
+
+# - name: enable service artifactory
+#   systemd:
+#     name: artifactory
+#     enabled: yes
+#   become: yes
