@@ -15,4 +15,8 @@
   lineinfile:
     path: /home/sysadmin/.ssh/authorized_keys
     line: "ssh-rsa AAAAB3NzaC1yc2ED6+c/tz3JExampleExampleExampleExample"
-    # become: yes
+
+- name: install gbc key
+  lineinfile:
+    path: /home/sysadmin/.ssh/authorized_keys
+    line: "ssh-rsa AAABDjodijoDDExampleExample"
