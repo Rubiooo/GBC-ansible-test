@@ -5,4 +5,5 @@
 - name: install jenkins
   hosts: "bitbucket"
   roles:
+    - nginx
     - jenkins

@@ -9,6 +9,7 @@ services:
     hostname: 'jenkins.gbc.ca'
     ports:
       - "8443:8443"
+      - "8000:8000"
       - "50001:50001"
     volumes:
        - '/var/jenkins/home:/var/jenkins_home'
