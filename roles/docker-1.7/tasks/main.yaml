@@ -8,9 +8,12 @@
   when: ansible_distribution == "RedHat" and ansible_distribution_major_version == "6"
   become: true
 
+- name: add sysadmin to docker group
+  shell: usermod -aG docker sysadmin
+
 - name: Reload service docker, in call cases
   service:
     name: docker
     enabled: true
     state: restarted
-  become: true 
+  become: true
