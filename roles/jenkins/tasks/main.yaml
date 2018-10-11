@@ -34,3 +34,14 @@
     group: root
     mode: 0600
   become: true
+
+
+- name: copy jenkins.service
+  copy:
+    src: jenkins.service
+    dest: /etc/systemd/system/jenkins.service
+
+- name: enable service jenkins
+  systemd:
+    name: jenkins
+    enabled: yes

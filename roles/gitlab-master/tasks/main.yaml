@@ -20,3 +20,13 @@
   copy:
     src: config/
     dest: /app/gitlab/config/
+
+- name: copy gitlab.service
+  copy:
+    src: gitlab.service
+    dest: /etc/systemd/system/gitlab.service
+
+- name: enable service gitlab
+  systemd:
+    name: gitlab
+    enabled: yes
