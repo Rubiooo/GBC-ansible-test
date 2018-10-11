@@ -5,6 +5,7 @@ antisamy-markup-formatter
 authentication-tokens
 branch-api
 build-with-parameters
+build-user-vars-plugin
 checkmarx
 cloudbees-folder
 conditional-buildstep
