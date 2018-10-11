@@ -7,7 +7,7 @@ ENV JENKINS_OPTS --httpPort=8000
 EXPOSE 8443 8000
 
 USER root
-RUN apt-get update && apt-get install -y jq
+RUN apt-get update && apt-get install -y jq zip
 RUN curl -O https://download.docker.com/linux/static/stable/x86_64/docker-18.03.1-ce.tgz \
 && tar xzfv docker-18.03.1-ce.tgz docker/docker \
 && mv docker/docker /bin/ \
