@@ -1,0 +1,40 @@
+- name: Ensure /app/bitbucket directory exists
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ansible_user}}"
+    mode: 0755
+  with_items:
+    - /app/bitbucket
+    - /app/bitbucket/data
+    - /app/bitbucket/data/shared
+    - /app/bitbucket/postgresql
+    - /app/bitbucket/nginx
+  become: true
+
+- name: copy docker-compose.yaml
+  copy:
+    src: docker-compose.yaml
+    dest: /app/bitbucket/docker-compose.yaml
+
+- name: copy nginx config
+  copy:
+    src: nginx/
+    dest: /app/bitbucket/nginx/
+
+- name: copy bitbucket config
+  copy:
+    src: bitbucket/bitbucket.properties
+    dest: /app/bitbucket/data/shared/bitbucket.properties
+
+- name: copy bitbucket.service
+  copy:
+    src: bitbucket.service
+    dest: /etc/systemd/system/bitbucket.service
+  become: yes
+
+- name: enable service bitbucket
+  systemd:
+    name: bitbucket
+    enabled: yes
+  become: yes

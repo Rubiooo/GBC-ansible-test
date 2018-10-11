@@ -1,0 +1,31 @@
+version: "2.2"
+services:
+    bitbucket:
+      image: 'atlassian/bitbucket-server:5.9.0'
+      container_name: bitbucket
+      restart: always
+      hostname: 'gitrepo.gbc.ca'
+      environment:
+        - ELASTICSEARCH_ENABLED=false
+      ports:
+        - '7990:7990'
+        - '7999:7999'
+      volumes:
+        - '/app/bitbucket/data:/var/atlassian/application-data/bitbucket'
+    db:
+      image: 'postgres'
+      container_name: bitbucket_db
+      restart: always
+      environment:
+        - POSTGRES_USER=gbc
+        - POSTGRES_PASSWORD=gbcpassword
+      volumes:
+        - '/app/bitbucket/postgresql:/var/lib/postgresql/data'
+    proxy:
+      image: 'nginx'
+      container_name: bitbucket_proxy
+      restart: always
+      network_mode: "host"
+      volumes:
+        - /app/bitbucket/nginx/nginx.conf:/etc/nginx/nginx.conf
+        - /app/bitbucket/nginx/ssl:/etc/nginx/ssl
