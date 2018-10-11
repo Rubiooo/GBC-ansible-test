@@ -7,6 +7,7 @@ services:
       hostname: 'gitrepo.gbc.ca'
       environment:
         - ELASTICSEARCH_ENABLED=false
+         - JVM_MAXIMUM_MEMORY=2048m
       ports:
         - '7990:7990'
         - '7999:7999'
