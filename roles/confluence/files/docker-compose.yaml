@@ -1,0 +1,27 @@
+version: "2.2"
+services:
+    confluence:
+      image: 'atlassian/confluence-server:6.8.0'
+      container_name: confluence
+      restart: always
+      hostname: 'confluence.gbc.ca'
+      environment:
+        - JVM_MAXIMUM_MEMORY=2048m
+        - CATALINA_CONNECTOR_PROXYNAME=confluence.gbc.ca
+        - CATALINA_CONNECTOR_PROXYPORT=443
+        - CATALINA_CONNECTOR_SCHEME=https
+        - CATALINA_CONNECTOR_SECURE=true
+      ports:
+        - '8090:8090'
+        - '8091:8091'
+      volumes:
+        - '/app/confluence/data:/var/atlassian/application-data/confluence'
+    db:
+      image: 'postgres'
+      container_name: confluence_db
+      restart: always
+      environment:
+        - POSTGRES_USER=gbc
+        - POSTGRES_PASSWORD=gbcpassword
+      volumes:
+        - '/app/confluence/postgresql:/var/lib/postgresql/data'

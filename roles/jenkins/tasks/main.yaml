@@ -11,7 +11,7 @@
 
 - name: copy docker-compose.yaml and dockerfile
   copy:
-    src: .
+    src: jenkins/
     dest: /app/jenkins/
 
 - file:

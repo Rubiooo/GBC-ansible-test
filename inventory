@@ -1,0 +1,12 @@
+
+[sandbox:children]
+gen
+stu
+fin
+emp
+
+[gitlab]
+dmz01.gbc.ca ansible_user=sysadmin
+
+[bitbucket]
+gbsft02.gbc.local ansible_host=10.10.10.10 ansible_user=sysadmin

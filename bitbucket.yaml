@@ -1,0 +1,15 @@
+---
+# ansible-playbook -i inventory bitbucket.yaml -K
+# type in password
+
+- name: install docker
+  hosts: "bitbucket"
+  roles:
+    # - ssh-key
+    # - epel-repo
+    # - docker
+    # - docker-compose
+    - bitbucket
+    - confluence
+    - jira
+    - nginx

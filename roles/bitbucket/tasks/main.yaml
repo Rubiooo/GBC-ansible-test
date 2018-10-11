@@ -17,10 +17,6 @@
     src: docker-compose.yaml
     dest: /app/bitbucket/docker-compose.yaml
 
-- name: copy nginx config
-  copy:
-    src: nginx/
-    dest: /app/bitbucket/nginx/
 
 - name: copy bitbucket config
   copy:

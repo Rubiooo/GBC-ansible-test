@@ -3,6 +3,6 @@
 # passwordXXX
 
 - name: install jenkins
-  hosts: "gitlab"
+  hosts: "bitbucket"
   roles:
     - jenkins

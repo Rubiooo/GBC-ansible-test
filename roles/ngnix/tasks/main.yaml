@@ -1,0 +1,32 @@
+- name: Ensure /app/nginx directory exists
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ansible_user}}"
+    mode: 0755
+  with_items:
+    - /app/nginx
+    - /app/nginx/config
+  become: true
+
+- name: copy docker-compose.yaml
+  copy:
+    src: docker-compose.yaml
+    dest: /app/nginx/docker-compose.yaml
+
+- name: copy nginx config
+  copy:
+    src: config
+    dest: /app/nginx/
+
+- name: copy nginx.service
+  copy:
+    src: nginx.service
+    dest: /etc/systemd/system/nginx.service
+  become: yes
+
+- name: enable service nginx
+  systemd:
+    name: nginx
+    enabled: yes
+  become: yes

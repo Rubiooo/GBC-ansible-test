@@ -1,0 +1,12 @@
+[Unit]
+Description=Confluence
+Requires=docker.service
+After=docker.service
+
+[Service]
+Restart=always
+ExecStart=/usr/local/bin/docker-compose -f /app/confluence/docker-compose.yaml up
+ExecStop=/usr/local/bin/docker-compose -f /app/confluence/docker-compose.yaml down
+
+[Install]
+WantedBy=multi-user.target

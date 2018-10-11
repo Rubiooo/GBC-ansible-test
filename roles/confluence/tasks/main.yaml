@@ -1,0 +1,28 @@
+- name: Ensure /app/confluence directory exists
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ansible_user}}"
+    mode: 0755
+  with_items:
+    - /app/confluence
+    - /app/confluence/data
+    - /app/confluence/postgresql
+  become: true
+
+- name: copy docker-compose.yaml
+  copy:
+    src: docker-compose.yaml
+    dest: /app/confluence/docker-compose.yaml
+
+- name: copy confluence.service
+  copy:
+    src: confluence.service
+    dest: /etc/systemd/system/confluence.service
+  become: yes
+
+- name: enable service confluence
+  systemd:
+    name: confluence
+    enabled: yes
+  become: yes

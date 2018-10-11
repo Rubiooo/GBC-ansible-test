@@ -1,0 +1,34 @@
+- name: Ensure /app/jira directory exists
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ansible_user}}"
+    mode: 0755
+  with_items:
+    - /app/jira
+    - /app/jira/data
+    - /app/jira/postgresql
+  become: true
+
+- name: copy docker-compose.yaml
+  copy:
+    src: docker-compose.yaml
+    dest: /app/jira/docker-compose.yaml
+
+
+- name: copy jira dockerfile
+  copy:
+    src: docker
+    dest: /app/jira
+
+- name: copy jira.service
+  copy:
+    src: jira.service
+    dest: /etc/systemd/system/jira.service
+  become: yes
+
+- name: enable service jira
+  systemd:
+    name: jira
+    enabled: yes
+  become: yes

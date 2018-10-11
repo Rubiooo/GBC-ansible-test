@@ -1,0 +1,25 @@
+version: "2.2"
+services:
+    jira:
+      build: ./docker
+      container_name: jira
+      restart: always
+      hostname: 'jira.gbc.ca'
+      environment:
+        - X_PROXY_SCHEME=https
+        - X_PROXY_PORT=443
+        - X_PROXY_NAME=jira.gbc.ca
+        - JVM_MAXIMUM_MEMORY=2048m
+      ports:
+        - '8080:8080'
+      volumes:
+        - '/app/jira/data:/var/atlassian/jira'
+    db:
+      image: 'postgres:9.5'
+      container_name: jira_db
+      restart: always
+      environment:
+        - POSTGRES_USER=gbc
+        - POSTGRES_PASSWORD=gbcpassword
+      volumes:
+        - '/app/jira/postgresql:/var/lib/postgresql/data'
