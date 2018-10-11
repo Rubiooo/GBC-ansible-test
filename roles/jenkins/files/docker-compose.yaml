@@ -16,3 +16,4 @@ services:
        - '/var/run/docker.sock:/var/run/docker.sock'
        - '/app/jenkins/config/ssh:/root/.ssh'
        - '/app/jenkins/config/docker:/root/.docker'
+       - '/etc/localtime:/etc/localtime'
