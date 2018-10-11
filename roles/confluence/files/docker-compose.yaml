@@ -16,6 +16,7 @@ services:
         - '8091:8091'
       volumes:
         - '/app/confluence/data:/var/atlassian/application-data/confluence'
+        - '/etc/localtime:/etc/localtime'
     db:
       image: 'postgres'
       container_name: confluence_db
