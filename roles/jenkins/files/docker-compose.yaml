@@ -11,6 +11,8 @@ services:
       - "8443:8443"
       - "8000:8000"
       - "50001:50001"
+    environment:
+      JAVA_OPTS: '-Duser.timezone=America/Toronto'
     volumes:
        - '/var/jenkins/home:/var/jenkins_home'
        - '/var/run/docker.sock:/var/run/docker.sock'
