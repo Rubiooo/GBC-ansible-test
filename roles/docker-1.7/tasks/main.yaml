@@ -4,12 +4,13 @@
   register: yum_repo
 
 - name: Install docker-1.7
-  shell: yum localinstall --nogpgcheck /tmp/docker-engine.rpm
+  shell: yum localinstall -y --nogpgcheck /tmp/docker-engine.rpm
   when: ansible_distribution == "RedHat" and ansible_distribution_major_version == "6"
   become: true
 
 - name: add sysadmin to docker group
   shell: usermod -aG docker sysadmin
+  become: true
 
 - name: Reload service docker, in call cases
   service:
