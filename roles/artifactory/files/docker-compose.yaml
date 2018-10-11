@@ -9,6 +9,7 @@ services:
         - DB_HOST=db
         - DB_USER=gbc
         - DB_PASSWORD=gbcpassword
+        - EXTRA_JAVA_OPTIONS=-Duser.timezone=America/Toronto
       ports:
         - '8081:8081'
       volumes:
