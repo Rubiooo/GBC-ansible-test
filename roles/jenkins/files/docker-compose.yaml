@@ -11,6 +11,6 @@ services:
       - "8443:8443"
       - "50001:50001"
     volumes:
-       - '/app/jenkins/home:/var/jenkins_home'
+       - '/var/jenkins/home:/var/jenkins_home'
        - '/var/run/docker.sock:/var/run/docker.sock'
        - '/app/jenkins/config/ssh:/root/.ssh'
