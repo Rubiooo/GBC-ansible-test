@@ -23,6 +23,10 @@ scrape_configs:
     static_configs:
       - targets: ['localhost:9090']
 
+  - job_name: 'node_export'
+    static_configs:
+      - targets: ['gitrepo.gbc.ca:9100']
+
   - job_name: 'bitbucket'
     scheme: https
     metrics_path: '/plugins/servlet/prometheus/metrics'

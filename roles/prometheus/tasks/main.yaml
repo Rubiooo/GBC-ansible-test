@@ -36,8 +36,8 @@
     dest: /etc/systemd/system/prometheus.service
   become: yes
 
-# - name: enable service prometheus
-#   systemd:
-#     name: prometheus
-#     enabled: yes
-#   become: yes
+- name: enable service prometheus
+  systemd:
+    name: prometheus
+    enabled: yes
+  become: yes

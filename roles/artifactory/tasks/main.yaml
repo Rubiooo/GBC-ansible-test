@@ -22,8 +22,8 @@
     dest: /etc/systemd/system/artifactory.service
   become: yes
 
-# - name: enable service artifactory
-#   systemd:
-#     name: artifactory
-#     enabled: yes
-#   become: yes
+- name: enable service artifactory
+  systemd:
+    name: artifactory
+    enabled: yes
+  become: yes
